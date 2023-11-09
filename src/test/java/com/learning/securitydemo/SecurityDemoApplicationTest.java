@@ -87,7 +87,7 @@ class SecurityDemoApplicationTest {
     }
 
     @Test
-    void shouldReturn403_whenRequestToJournalistAuthorityEndpointWithValidAuthorities() {
+    void shouldReturn403_whenRequestToJournalistAuthorityEndpointWithInvalidAuthorities() {
         HttpEntity<String> requestEntity = new HttpEntity<>(getAuthHeader(USER_WITH_USER_AUTHORITY));
         ResponseEntity<String> response = restTemplate.exchange(
                 HELLO_JOURNALIST_URL,

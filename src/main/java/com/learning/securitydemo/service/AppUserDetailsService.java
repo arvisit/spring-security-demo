@@ -2,13 +2,13 @@ package com.learning.securitydemo.service;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.learning.securitydemo.persistence.model.AppUser;
+import com.learning.securitydemo.persistence.model.RoleEnum;
 import com.learning.securitydemo.persistence.repository.AppUserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -31,9 +31,9 @@ public class AppUserDetailsService implements UserDetailsService {
                 .accountExpired(isDisabled)
                 .accountLocked(isDisabled)
                 .credentialsExpired(isDisabled)
-                .authorities(user.getRoles().stream()
-                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
-                        .toList())
+                .roles(user.getRoles().stream()
+                        .map(RoleEnum::name)
+                        .toArray(String[]::new))
                 .build();
     }
 

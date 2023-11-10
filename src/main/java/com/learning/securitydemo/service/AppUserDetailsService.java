@@ -22,7 +22,7 @@ public class AppUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser user = appUserRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException(String.format("User with usrename '%s' not found!", username)));
+                () -> new UsernameNotFoundException(String.format("User with username '%s' not found!", username)));
         boolean isDisabled = !user.getEnabled();
 
         return withUsername(user.getUsername())
